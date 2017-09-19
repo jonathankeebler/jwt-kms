@@ -7,7 +7,7 @@ Sign and validate JWT tokens using keys stored in the AWS Key Management Service
 
 ## Installation
 ```sh
-npm install jonathankeebler/jwt-kms
+npm install jwt-kms
 ```
 
 ## Usage
