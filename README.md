@@ -55,3 +55,8 @@ jwtkms.verify(token, signing_key).then(function(decoded)
 npm install mocha -g # if you don't have it installed already
 npm test
 ```
+
+## Credit 
+
+- Created by  [Jonathan Keebler](http://www.keebler.net)
+- Inspired by [kms-jwt](https://github.com/bombbomb/kms-jwt)
