@@ -47,9 +47,54 @@ describe("JWT-KMS", function()
         {
             should.exist(decoded);
             decoded.should.have.property('foo').eql("bar");
+            decoded.should.have.property('iat');
+            decoded.should.not.have.property('exp');
 
             done();
         }).catch(function(err){ should.not.exist(err); });
+    });
+
+    it("should sign a payload with expiration date", function(done)
+    {
+        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() + 10000)}, process.env.KEY_ARM).then(function(new_token)
+        {
+            should.exist(new_token);
+            token = new_token;
+
+            done();
+        }).catch(function(err){ should.exist(err); });
+    });
+
+    it("should verify a token with a valid expiration date", function(done)
+    {
+        jwtkms.verify(token).then(function(decoded)
+        {
+            should.exist(decoded);
+            decoded.should.have.property('foo').eql("bar");
+            decoded.should.have.property('iat');
+            decoded.should.have.property('exp');
+
+            done();
+        }).catch(function(err){ should.not.exist(err); });
+    });
+
+    it("should sign a payload with expired expiration date", function(done)
+    {
+        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() - 1)}, process.env.KEY_ARM).then(function(new_token)
+        {
+            should.exist(new_token);
+            token = new_token;
+
+            done();
+        }).catch(function(err){ should.exist(err); });
+    });
+
+    it("should not verify an expired token", function(done)
+    {
+        jwtkms.verify(token).then(function(decoded)
+        {
+            // Should not get here
+        }).catch(function(err){ should.exist(err); done(); });
     });
 
     it('should not verify an invalid token', function(done)

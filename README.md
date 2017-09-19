@@ -29,6 +29,16 @@ jwtkms.sign({foo: "bar"}, key_arn).then(function(token)
     // ...
 });
 
+// Create a JWT token using a KMS key identified by a key_arn
+jwtkms.sign(
+    { foo: "bar" }, 
+    { expires: new Date(Date.now() + 60*1000) } // Expires in 60 seconds
+    key_arn
+).then(function(token)
+{
+    // ...
+});
+
 // Verify that you have a valid JWT key
 jwtkms.verify(token).then(function(decoded)
 {
