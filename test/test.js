@@ -38,7 +38,7 @@ describe("JWT-KMS", function()
             token = new_token;
 
             done();
-        }).catch(function(err){ should.exist(err); });
+        }).catch(function(err){ throw err; });
     });
 
     it("should verify a token", function(done)
@@ -51,7 +51,7 @@ describe("JWT-KMS", function()
             decoded.should.not.have.property('exp');
 
             done();
-        }).catch(function(err){ should.not.exist(err); });
+        }).catch(function(err){ throw err; });
     });
 
     it("should sign a payload with expiration date", function(done)
@@ -62,7 +62,7 @@ describe("JWT-KMS", function()
             token = new_token;
 
             done();
-        }).catch(function(err){ should.exist(err); });
+        }).catch(function(err){ throw err; });
     });
 
     it("should verify a token with a valid expiration date", function(done)
@@ -75,7 +75,7 @@ describe("JWT-KMS", function()
             decoded.should.have.property('exp');
 
             done();
-        }).catch(function(err){ should.not.exist(err); });
+        }).catch(function(err){ throw err; });
     });
 
     it("should sign a payload with expired expiration date", function(done)
@@ -86,7 +86,7 @@ describe("JWT-KMS", function()
             token = new_token;
 
             done();
-        }).catch(function(err){ should.exist(err); });
+        }).catch(function(err){ throw err; });
     });
 
     it("should not verify an expired token", function(done)
