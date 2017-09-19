@@ -11,7 +11,7 @@ describe("JWT-KMS", function()
 
     it("should take a test arn in an ENV variable", function(done)
     {
-        process.env.should.have.property("KEY_ARM");
+        process.env.should.have.property("KEY_ARN");
 
         done();
     });
@@ -32,7 +32,7 @@ describe("JWT-KMS", function()
 
     it("should sign a payload", function(done)
     {
-        jwtkms.sign({foo: "bar"}, process.env.KEY_ARM).then(function(new_token)
+        jwtkms.sign({foo: "bar"}, process.env.KEY_ARN).then(function(new_token)
         {
             should.exist(new_token);
             token = new_token;
@@ -56,7 +56,7 @@ describe("JWT-KMS", function()
 
     it("should sign a payload with expiration date", function(done)
     {
-        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() + 10000)}, process.env.KEY_ARM).then(function(new_token)
+        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() + 10000)}, process.env.KEY_ARN).then(function(new_token)
         {
             should.exist(new_token);
             token = new_token;
@@ -80,7 +80,7 @@ describe("JWT-KMS", function()
 
     it("should sign a payload with expired expiration date", function(done)
     {
-        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() - 1)}, process.env.KEY_ARM).then(function(new_token)
+        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() - 1)}, process.env.KEY_ARN).then(function(new_token)
         {
             should.exist(new_token);
             token = new_token;
