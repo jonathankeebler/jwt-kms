@@ -1,0 +1,33 @@
+{
+  "name": "jwt-kms",
+  "version": "0.0.1",
+  "description": "JWT signed with AWS KMS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/* --bail"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "should": "^11.2.1",
+    "should-http": "^0.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jonathankeebler@github.com/jonathankeebler/jwt-kms.git"
+  },
+  "keywords": [
+    "jwt",
+    "kms",
+    "crypto"
+  ],
+  "author": "Jonathan Keebler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonathankeebler/jwt-kms/issues"
+  },
+  "homepage": "https://github.com/jonathankeebler/jwt-kms#readme",
+  "dependencies": {
+    "aws-sdk": "^2.118.0",
+    "jsonwebtoken": "^8.0.1"
+  }
+}
