@@ -38,7 +38,7 @@ describe("JWT-KMS", function()
             token = new_token;
 
             done();
-        }).catch(function(err){ should.not.exist(err); });
+        }).catch(function(err){ should.exist(err); });
     });
 
     it("should verify a token", function(done)
@@ -50,6 +50,16 @@ describe("JWT-KMS", function()
 
             done();
         }).catch(function(err){ should.not.exist(err); });
+    });
+
+    it('should not verify an invalid token', function(done)
+    {
+        var token_parts = token.split(".");
+
+        jwtkms.verify(token_parts[0] + "." + token_parts[1] + "." + "AQICAHh7R1QbF3+WxosbJFTfuTKfFZH+61Oimgx8/bItygMW3wHGbfc1lSutmYpuDg8XqSzOAAAAhjCBgwYJKoZIhvcNAQcGoHYwdAIBADBvBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDHiixPWB67X6kRqPFQIBEIBCcpJ2aHs0Srhzhvd6b2JO9fv63FdihVV8K3BPB7dgOYsxJi8tfLUrDKaHPFhOtHww6CSVgNb62Hh0/1YhUKnl0Gya").then(function(decoded)
+        {
+            // Should not get here
+        }).catch(function(err){ should.exist(err); done(); });
     });
 
 
