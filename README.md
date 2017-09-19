@@ -20,24 +20,17 @@ var jwtkms = new JWTKMS({
         region: "us-east-1",
         accessKeyId : process.env.AWS_ACCESS_KEY,
         secretAccessKey: process.env.AWS_SECRET_KEY
-    },
-    key_arm: process.env.KEY_ARM
+    }
 });
 
-// Create a signing key
-jwtkms.create_signing_key(public_key).then(function(signing_key)
+// Create a JWT token using a KMS key identified by a key_arn
+jwtkms.sign({foo: "bar"}, key_arn).then(function(token)
 {
     // ...
 });
 
-// Create a JWT token using the signing key
-jwtkms.sign({foo: "bar"}, signing_key).then(function(token)
-{
-    // ...
-});
-
-// Verify that a JWT token was created with the signing key
-jwtkms.verify(token, signing_key).then(function(decoded)
+// Verify that you have a valid JWT key
+jwtkms.verify(token).then(function(decoded)
 {
     console.log(decoded);
     /* 

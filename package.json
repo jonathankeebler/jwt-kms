@@ -1,7 +1,7 @@
 {
   "name": "jwt-kms",
   "version": "0.0.1",
-  "description": "JWT signed with AWS KMS",
+  "description": "Sign and validate JWT tokens using keys stored in the AWS Key Management Service (KMS).",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/* --bail"
@@ -28,6 +28,6 @@
   "homepage": "https://github.com/jonathankeebler/jwt-kms#readme",
   "dependencies": {
     "aws-sdk": "^2.118.0",
-    "jsonwebtoken": "^8.0.1"
+    "base64url": "^2.0.0"
   }
 }

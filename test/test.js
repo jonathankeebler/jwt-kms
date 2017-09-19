@@ -21,8 +21,7 @@ describe("JWT-KMS", function()
         jwtkms = new (require("../index.js"))({
             aws: {
                 region: "us-east-1"
-            },
-            key_arm: process.env.KEY_ARM
+            }
         });
 
         should.exist(jwtkms);
@@ -31,21 +30,9 @@ describe("JWT-KMS", function()
 
     });
 
-    it("should create a signing key", function(done)
+    it("should sign a payload", function(done)
     {
-        jwtkms.create_signing_key(public_key).then(function(signing_key)
-        {
-            should.exist(signing_key);
-
-            created_signing_key = signing_key;
-
-            done();
-        });
-    });
-
-    it("should sign a payload with the signing key", function(done)
-    {
-        jwtkms.sign({foo: "bar"}, created_signing_key).then(function(new_token)
+        jwtkms.sign({foo: "bar"}, process.env.KEY_ARM).then(function(new_token)
         {
             should.exist(new_token);
             token = new_token;
@@ -56,7 +43,7 @@ describe("JWT-KMS", function()
 
     it("should verify a token", function(done)
     {
-        jwtkms.verify(token, created_signing_key).then(function(decoded)
+        jwtkms.verify(token).then(function(decoded)
         {
             should.exist(decoded);
             decoded.should.have.property('foo').eql("bar");
