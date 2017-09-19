@@ -80,7 +80,7 @@ describe("JWT-KMS", function()
 
     it("should sign a payload with expired expiration date", function(done)
     {
-        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() - 1)}, process.env.KEY_ARN).then(function(new_token)
+        jwtkms.sign({foo: "bar"}, {expires: new Date(Date.now() - 2000)}, process.env.KEY_ARN).then(function(new_token)
         {
             should.exist(new_token);
             token = new_token;
