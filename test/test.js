@@ -14,6 +14,16 @@ describe("JWT-KMS", function()
         process.env.should.have.property("KEY_ARN");
 
         done();
+	});
+	
+	it("should instantiate an instance with a empty config", function(done)
+    {
+        jwtkms = new (require("../index.js"))();
+
+		should.exist(jwtkms);
+
+        done();
+
     });
 
     it("should instantiate an instance", function(done)

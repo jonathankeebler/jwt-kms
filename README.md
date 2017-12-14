@@ -22,8 +22,8 @@ const JWTKMS = require("jwt-kms");
 var jwtkms = new JWTKMS({
     aws: {
         region: "us-east-1",
-        accessKeyId : process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY
+        accessKeyId : process.env.AWS_ACCESS_KEY,	// Optional if set in environment
+        secretAccessKey: process.env.AWS_SECRET_KEY	// Optional if set in environment
     }
 });
 
