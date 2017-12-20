@@ -115,6 +115,60 @@ describe("JWT-KMS", function()
         {
             // Should not get here
         }).catch(function(err){ should.exist(err); done(); });
+	});
+	
+	it("should sign a payload that was issued 10 seconds before your local time", function(done)
+    {
+        jwtkms.sign({foo: "bar"}, {issued_at: new Date(Date.now() + 10000)}, process.env.KEY_ARN).then(function(new_token)
+        {
+            should.exist(new_token);
+            token = new_token;
+
+            done();
+        }).catch(function(err){ throw err; });
+    });
+
+    it("should verify a token that was issued 10 seconds before your local time", function(done)
+    {
+        jwtkms.verify(token).then(function(decoded)
+        {
+            should.exist(decoded);
+            decoded.should.have.property('foo').eql("bar");
+            decoded.should.have.property('iat');
+
+            done();
+        }).catch(function(err){ throw err; });
+	});
+
+	it("should verify a token wthat was issued 10 seconds before your local time", function(done)
+    {
+        jwtkms.verify(token).then(function(decoded)
+        {
+            should.exist(decoded);
+            decoded.should.have.property('foo').eql("bar");
+            decoded.should.have.property('iat');
+
+            done();
+        }).catch(function(err){ throw err; });
+	});
+
+	it("should sign a payload that was issued 1 hour before your local time", function(done)
+    {
+        jwtkms.sign({foo: "bar"}, {issued_at: new Date(Date.now() + 60*60*1000)}, process.env.KEY_ARN).then(function(new_token)
+        {
+            should.exist(new_token);
+            token = new_token;
+
+            done();
+        }).catch(function(err){ throw err; });
+    });
+	
+	it("should not verify a token that was issued 1 hour before your local time", function(done)
+    {
+        jwtkms.verify(token).then(function(decoded)
+        {
+            // Should not get here
+        }).catch(function(err){ should.exist(err); done(); });
     });
 
 
