@@ -169,6 +169,28 @@ describe("JWT-KMS", function()
         {
             // Should not get here
         }).catch(function(err){ should.exist(err); done(); });
+	});
+	
+	it("should throw a friendly error if passed a token that can't be decoded", function(done)
+    {
+        jwtkms.verify("FOO_BAR").then(function(decoded)
+        {
+            // Should not get here
+		}).catch(function(err)
+		{ 
+			should.exist(err); 
+			err.should.eql("Invalid token");
+			
+			jwtkms.verify("foo.bar.error").then(function(decoded)
+			{
+				// Should not get here
+			}).catch(function(err)
+			{ 
+				should.exist(err); 
+				err.should.eql("Invalid token");
+				done();
+			});
+		});
     });
 
 
