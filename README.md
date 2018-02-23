@@ -54,6 +54,20 @@ jwtkms.verify(token).then(function(decoded)
     */
 });
 
+// Validate that you have a JWT key but **DOESN'T CHECK FOR AUTHENTICITY**
+jwtkms.validate(token);
+// true
+
+jwtkms.validate("Not a JWT token");
+// false
+
+jwtkms.validate(expired_token);
+// false
+
+// This is why you need to use jwtkms.verify to check a token
+jwtkms.validate(token_but_not_authentic);
+// true
+
 ```
 
 ## Testing
