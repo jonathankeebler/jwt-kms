@@ -86,7 +86,13 @@ describe("JWT-KMS", function()
 
             done();
         }).catch(function(err){ throw err; });
-    });
+	});
+	
+	it("should validate a token", function(done)
+    {
+		jwtkms.validate(token).should.eql(true);
+		done();
+	});
 
     it("should sign a payload with expired expiration date", function(done)
     {
@@ -169,6 +175,18 @@ describe("JWT-KMS", function()
         {
             // Should not get here
         }).catch(function(err){ should.exist(err); done(); });
+	});
+
+	it("should not validate a token that is expired", function(done)
+    {
+		jwtkms.validate(token).should.eql(false);
+		done();
+	});
+
+	it("should validate a token that can't be decoded", function(done)
+    {
+		jwtkms.validate("BLAH BLAH").should.eql(false);
+		done();
 	});
 	
 	it("should throw a friendly error if passed a token that can't be decoded", function(done)
