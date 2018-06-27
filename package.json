@@ -1,6 +1,6 @@
 {
   "name": "jwt-kms",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Sign and validate JWT tokens using keys stored in the AWS Key Management Service (KMS).",
   "main": "index.js",
   "scripts": {
