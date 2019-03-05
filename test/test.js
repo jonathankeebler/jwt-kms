@@ -31,7 +31,8 @@ describe("JWT-KMS", function()
         jwtkms = new (require("../index.js"))({
             aws: {
                 region: "us-east-1"
-            }
+			},
+			secret: public_key
         });
 
         should.exist(jwtkms);
