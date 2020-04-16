@@ -1,5 +1,7 @@
 # JWT-KMS
 
+Initial Fork of https://github.com/jonathankeebler/jwt-kms
+
 Sign and validate JWT tokens using keys stored in the AWS Key Management Service (KMS). 
 
 Feature Todo List:
