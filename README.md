@@ -44,7 +44,7 @@ jwtkms.sign(
 });
 
 // Verify that you have a valid JWT key
-jwtkms.verify(token).then(function(decoded)
+jwtkms.verify(token, key_arn).then(function(decoded)
 {
     console.log(decoded);
     /* 
