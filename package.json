@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/jonathankeebler/jwt-kms#readme",
   "dependencies": {
-    "aws-sdk": "^2.264.1",
+    "aws-sdk": "^2.656.0",
     "base64url": "^3.0.0"
   }
 }
