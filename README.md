@@ -2,24 +2,22 @@
 
 Sign and validate JWT tokens using keys stored in the AWS Key Management Service (KMS). 
 
-Feature Todo List:
-- <strike>Symmetric encryption (both parties have IAM access to KMS key)</strike>
-- Asymmetic encryption (only 1 party has IAM access to KMS key)
+This library uses the AWS SDK V3 library
 
 ## Requirements
-- node.js 6+
+- node.js 14+
 
 ## Installation
 ```sh
-npm install jwt-kms
+npm install jwt-kms-v3
 ```
 
 ## Usage
 
 ```js
-const JWTKMS = require("jwt-kms");
+import JWTKMS from 'jwt-kms';
 
-var jwtkms = new JWTKMS({
+const jwtkms = new JWTKMS({
     aws: {
         region: "us-east-1",
         accessKeyId : process.env.AWS_ACCESS_KEY,	// Optional if set in environment
@@ -28,56 +26,50 @@ var jwtkms = new JWTKMS({
 });
 
 // Create a JWT token using a KMS key identified by a key_arn
-jwtkms.sign({foo: "bar"}, key_arn).then(function(token)
-{
-    // ...
-});
+const token = await jwtkms.sign({foo: "bar"}, key_arn);
+// ...
 
 // Create a JWT token using a KMS key identified by a key_arn
-jwtkms.sign(
+const token = await jwtkms.sign(
     { foo: "bar" }, 
     { expires: new Date(Date.now() + 60*1000) }, // Expires in 60 seconds
     key_arn
-).then(function(token)
-{
-    // ...
-});
+);
+// ...
 
 // Verify that you have a valid JWT key
-jwtkms.verify(token).then(function(decoded)
-{
+const decoded = await jwtkms.verify(token);
     console.log(decoded);
     /* 
     {
         foo: "bar
     }
     */
-});
 
 // Validate that you have a JWT key but **DOESN'T CHECK FOR AUTHENTICITY**
 jwtkms.validate(token);
-// true
+// { components, valid: true}
 
 jwtkms.validate("Not a JWT token");
-// false
+// { error: 'Invalid token' valid: false }
 
 jwtkms.validate(expired_token);
-// false
+// { error: 'Token expired' valid: false }
 
 // This is why you need to use jwtkms.verify to check a token
 jwtkms.validate(token_but_not_authentic);
-// true
+// { components, valid: true}
 
 ```
 
 ## Testing
 
 ```sh
-npm install mocha -g # if you don't have it installed already
+npm install 
 npm test
 ```
 
 ## Credit 
 
-- Created by  [Jonathan Keebler](http://www.keebler.net)
-- Inspired by [kms-jwt](https://github.com/bombbomb/kms-jwt)
+- Created by  [Kevin Wicken](https://github.com/wicken)
+- Inspired by [Jonathan Keebler](http://www.keebler.net)

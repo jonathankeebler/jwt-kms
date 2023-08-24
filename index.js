@@ -1,1 +1,2 @@
-exports = module.exports = require('./lib/jwtkms.js');
+import jwtkms from './lib/jwtkms.js';
+export default jwtkms;
