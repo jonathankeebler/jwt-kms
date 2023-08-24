@@ -1,11 +1,11 @@
 {
   "type": "module",
-  "name": "jwt-kms",
-  "version": "1.1.1",
+  "name": "jwt-kms-v3",
+  "version": "1.0.0",
   "description": "Sign and validate JWT tokens using keys stored in the AWS Key Management Service (KMS).",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/* --bail --timeout=5000"
+    "test": "mocha test/* --bail"
   },
   "devDependencies": {
     "assert": "^1.4.1",
@@ -15,22 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://jonathankeebler@github.com/jonathankeebler/jwt-kms.git"
+    "url": "git+https://wicken@github.com/wicken/jwt-kms-v3.git"
   },
   "keywords": [
     "jwt",
     "kms",
     "crypto"
   ],
-  "author": "Jonathan Keebler",
+  "author": "Kevin Wicken",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jonathankeebler/jwt-kms/issues"
+    "url": "https://github.com/wicken/jwt-kms-v3/issues"
   },
-  "homepage": "https://github.com/jonathankeebler/jwt-kms#readme",
+  "homepage": "https://github.com/wicken/jwt-kms-v3#readme",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.398.0",
-    "@aws-sdk/client-sts": "^3.398.0",
     "base64url": "^3.0.0"
   }
 }
